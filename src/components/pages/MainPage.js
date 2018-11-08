@@ -1,8 +1,24 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Shelf from '../Shelf';
+import * as BooksAPI from '../../BooksAPI'; //taken from App.js
 
 class MainPage extends React.Component {
+  constructor(props) { //constructor creates a starting state for the books
+  super(props);
+  this.state = {
+    books: []
+  }
+}
+
+  componentDidMount () { //componentDidMount loads all the books we're currently reading
+    BooksAPI.getAll()
+    .then(re => {
+      console.log(re);
+      this.setState({ books: re });
+    });
+  }
+
   render() {
     return (
       <div className="list-books">
@@ -12,9 +28,9 @@ class MainPage extends React.Component {
         <div className="list-books-content">
           <div>
 
-            <Shelf />
-            <Shelf />
-            <Shelf />
+            <Shelf name="Currently Reading" books={this.state.books.filter(b => b.shelf === "currentlyReading")} />
+            <Shelf name="Want to Read" books={this.state.books.filter(b => b.shelf === "wantToRead")} />
+            <Shelf name="Read" books={this.state.books.filter(b => b.shelf === "read")} />
 
           </div>
         </div>
