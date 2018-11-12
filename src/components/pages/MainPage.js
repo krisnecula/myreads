@@ -13,15 +13,14 @@ class MainPage extends React.Component {
 
   componentDidMount () { //componentDidMount loads all the books we're currently reading
     BooksAPI.getAll()
-    .then(re => {
-      console.log(re);
-      this.setState({ books: re });
+    .then(res => {
+      this.setState({ books: res });
     });
   }
 
   updateBook = (book, shelf) => {
     BooksAPI.update(book, shelf) //call BooksAPI.js
-    .then(re => {
+    .then(res => {
       book.shelf = shelf;
       this.setState(state => ({
         books: state.books.filter(b => b.id !== book.id).concat([book])
