@@ -12,5 +12,14 @@ ReactDOM.render(
   </BrowserRouter>,
   document.getElementById('root')
 )
-//wrap BrowserRouter around the app component: 
+//wrap BrowserRouter around the app component:
 //allows us to use route components inside BrowserRouter
+
+//Register service worker
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker
+  .register('/sw.js')
+  .catch(function(err) {
+    console.error(err);
+  });
+}
