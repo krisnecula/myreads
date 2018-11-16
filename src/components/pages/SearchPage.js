@@ -1,9 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { DebounceInput } from 'react-debounce-input';
 import * as BooksAPI from '../../BooksAPI';
 import Book from '../Book';
 
 class SearchPage extends React.Component {
+  state = {
+  value: ''
+};
+
   constructor(props) {
   super(props);
   this.state = {
@@ -87,5 +92,8 @@ class SearchPage extends React.Component {
 //swap HTML for Link tag to keep back button functionality
 //each time we enter new characters into search,
 //call updateQuery and pass in the new event target value
+
+const appRoot = document.createElement('div');
+document.body.appendChild(appRoot);
 
 export default SearchPage;
